@@ -47,6 +47,7 @@ import org.opengis.feature.IllegalAttributeException;
 import org.opengis.feature.simple.SimpleFeature;
 import org.opengis.feature.simple.SimpleFeatureType;
 import org.opengis.feature.type.FeatureType;
+import org.opengis.style.GraphicLegend;
 import org.opengis.util.InternationalString;
 
 import com.vividsolutions.jts.geom.Coordinate;
@@ -218,7 +219,7 @@ public class BufferedImageLegendGraphicBuilder {
 
         final SLDStyleFactory styleFactory = new SLDStyleFactory();
         final Color bgColor = LegendUtils.getBackgroundColor(request);
-        for (int i = 0; i < ruleCount; i++) {
+        for (int i = 0; i < ruleCount; i++) {           
             final Symbolizer[] symbolizers = applicableRules[i].getSymbolizers();
 
             // BufferedImage image = prepareImage(w, h, request.isTransparent());
@@ -230,22 +231,41 @@ public class BufferedImageLegendGraphicBuilder {
                     hintsMap);
             graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
                     RenderingHints.VALUE_ANTIALIAS_ON);
+            
+            GraphicLegend legend = applicableRules[i].getLegend();
+            
+            // If this rule has a legend graphic defined in the SLD, use it
+            if (null != legend) {
+                if (this.samplePoint == null) {
+                    Coordinate coord = new Coordinate(w / 2, h / 2);
 
-            for (int sIdx = 0; sIdx < symbolizers.length; sIdx++) {
-                final Symbolizer symbolizer = symbolizers[sIdx];
-
-                if (symbolizer instanceof RasterSymbolizer) {
-                    throw new IllegalStateException(
-                            "It is not legal to have a RasterSymbolizer here");
-                } else {
-                    Style2D style2d = styleFactory.createStyle(sampleFeature, symbolizer,
-                            scaleRange);
-                    LiteShape2 shape = getSampleShape(symbolizer, w, h);
-                    
-                    if (style2d != null) {
-                        shapePainter.paint(graphics, shape, style2d, scaleDenominator);
+                    try {
+                        this.samplePoint = new LiteShape2(geomFac.createPoint(coord), null, null, false);
+                    } catch (Exception e) {
+                        this.samplePoint = null;
                     }
                 }
+                shapePainter.paint(graphics, this.samplePoint, legend, scaleDenominator, false);
+                 
+            } else {
+
+                for (int sIdx = 0; sIdx < symbolizers.length; sIdx++) {
+                    final Symbolizer symbolizer = symbolizers[sIdx];
+
+                    if (symbolizer instanceof RasterSymbolizer) {
+                        throw new IllegalStateException(
+                                "It is not legal to have a RasterSymbolizer here");
+                    } else {
+                        Style2D style2d = styleFactory.createStyle(sampleFeature, symbolizer,
+                                scaleRange);
+                        LiteShape2 shape = getSampleShape(symbolizer, w, h);
+
+                        if (style2d != null) {
+                            shapePainter.paint(graphics, shape, style2d, scaleDenominator);
+                        }
+                    }
+                }
+                
             }
 
             legendsStack.add(image);
