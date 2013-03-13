@@ -280,5 +280,11 @@
         <module>kml2</module>
       </modules>
     </profile>
+    <profile>      
+      <id>netcdf</id>
+      <modules>
+        <module>netcdf</module>
+      </modules>
+    </profile>
   </profiles>
 </project>

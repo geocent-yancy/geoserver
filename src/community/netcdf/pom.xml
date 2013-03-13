@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!-- 
+ Copyright (c) 2001 - 2013 OpenPlans - www.openplans.org. All rights reserved.
+ This code is licensed under the GPL 2.0 license, available at the root
+ application directory.
+ -->
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.geoserver</groupId>
+        <artifactId>community</artifactId>
+        <version>2.4-SNAPSHOT</version>
+    </parent>
+  
+    <groupId>org.geoserver.community</groupId>
+    <artifactId>netcdf</artifactId>
+    <name>NetCDF Coverage Store</name>
+  
+    <repositories>
+        <repository>
+            <id>opengeo</id>
+            <name>opengeo</name>
+            <url>http://repo.opengeo.org</url>
+        </repository>
+    </repositories>
+  
+    <properties>
+        <commons-lang.version>2.1</commons-lang.version>
+        <netcdf.version>4.2-min</netcdf.version>
+        <joda-time.version>1.5.2</joda-time.version>
+        <httpclient.version>3.1</httpclient.version>
+        <slf4j.version>1.5.8</slf4j.version>
+        <source.version>1.5</source.version>
+        <target.version>1.5</target.version>
+    </properties>
+  
+    <dependencies>        
+        <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.geoserver.web</groupId>
+            <artifactId>web-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>commons-lang</groupId>
+            <artifactId>commons-lang</artifactId>
+            <!--<version>${commons-lang.version}</version>-->
+        </dependency>
+        <dependency>
+            <groupId>edu.ucar</groupId>
+            <artifactId>netcdf</artifactId>
+            <version>${netcdf.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>${joda-time.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-coverage</artifactId>
+            <version>${gt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-geometry</artifactId>
+            <version>${gt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-opengis</artifactId>
+            <version>${gt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-xml</artifactId>
+            <version>${gt.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>commons-httpclient</groupId>
+            <artifactId>commons-httpclient</artifactId>
+            <version>${httpclient.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.10</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${slf4j.version}</version>
+            <scope>test</scope>
+        </dependency> 
+        <dependency>
+            <groupId>org.geotools</groupId>
+            <artifactId>gt-epsg-hsql</artifactId>
+            <version>${gt.version}</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+  
+<!--    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${source.version}</source>
+                    <target>${target.version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <finalName>gs-${artifactId}-${version}</finalName>
+                    <outputDirectory>target</outputDirectory>
+                    <descriptors>
+                        <descriptor>src/main/assembly/dependencies.xml</descriptor>
+                    </descriptors>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                        </manifest>
+                    </archive>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>single</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>-->
+</project>
