@@ -9,7 +9,7 @@ import static org.junit.Assert.assertEquals;
 import java.io.IOException;
 import org.geocent.geotools.NetCdfUtil;
 import org.geocent.geotools.netcdf.index.IndexingStrategy;
-import org.geocent.geotools.netcdf.index.NearestNeighbor;
+import org.geocent.geotools.netcdf.index.NearestNeighborIndexingStrategy;
 import org.geocent.test.TestData;
 import org.junit.After;
 import org.junit.Before;
@@ -33,7 +33,7 @@ public class NetCDFGetCoordsTest {
 
     @Before
     public void setUp() throws Exception {
-	classUnderTest = new NearestNeighbor();
+	classUnderTest = new NearestNeighborIndexingStrategy();
     }
 
     @After

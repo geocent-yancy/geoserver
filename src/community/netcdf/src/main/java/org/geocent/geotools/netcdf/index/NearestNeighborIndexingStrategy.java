@@ -16,9 +16,9 @@ import ucar.ma2.Array;
  *
  * @author Yancy Matherne - Geocent
  */
-public class NearestNeighbor implements IndexingStrategy {
+public class NearestNeighborIndexingStrategy implements IndexingStrategy {
 
-    private static final Logger LOG = Logging.getLogger(NearestNeighbor.class);
+    private static final Logger LOG = Logging.getLogger(NearestNeighborIndexingStrategy.class);
 
     /**
      * Find the index of the closest coordinate value in an array.

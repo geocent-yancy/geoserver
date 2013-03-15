@@ -27,8 +27,6 @@
   
     <properties>
         <commons-lang.version>2.1</commons-lang.version>
-        <netcdf.version>4.2-min</netcdf.version>
-        <joda-time.version>1.5.2</joda-time.version>
         <httpclient.version>3.1</httpclient.version>
         <slf4j.version>1.5.8</slf4j.version>
         <source.version>1.5</source.version>

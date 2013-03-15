@@ -27,7 +27,7 @@ import org.geocent.geotools.GrdDataEncapsulator;
 import org.geocent.geotools.NetCdfUtil;
 import org.geocent.geotools.ParamInformation;
 import org.geocent.geotools.netcdf.index.IndexingStrategy;
-import org.geocent.geotools.netcdf.index.NearestNeighbor;
+import org.geocent.geotools.netcdf.index.NearestNeighborIndexingStrategy;
 import org.geotools.coverage.grid.GridEnvelope2D;
 import org.geotools.geometry.GeneralEnvelope;
 import org.geotools.util.logging.Logging;
@@ -94,7 +94,7 @@ public class NetCDFFileInspector {
      * default no arg constructor.
      */
     public NetCDFFileInspector() {
-	this.indexingStrategy = new NearestNeighbor();
+	this.indexingStrategy = new NearestNeighborIndexingStrategy();
     }
 
     /**
@@ -103,7 +103,7 @@ public class NetCDFFileInspector {
     public NetCDFFileInspector(File file) {
 	validateNetCdfFile(file.getAbsolutePath());
 	this.file = file;
-	this.indexingStrategy = new NearestNeighbor();
+	this.indexingStrategy = new NearestNeighborIndexingStrategy();
 	setProperties();
     }
 

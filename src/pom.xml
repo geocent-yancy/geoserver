@@ -1454,6 +1454,8 @@
   <poi.version>3.8</poi.version>
   <wicket.version>1.4.12</wicket.version>
   <ant.version>1.8.4</ant.version>
+  <netcdf.version>4.2-min</netcdf.version>
+  <joda-time.version>1.5.2</joda-time.version>
   <java.awt.headless>true</java.awt.headless>
   <jvm.opts></jvm.opts>
   <jalopy.phase>disabled</jalopy.phase>
