@@ -242,5 +242,11 @@
 				<module>libjpeg-turbo</module>
 			</modules>
 		</profile>    
+    <profile>      
+      <id>map-package</id>
+      <modules>
+        <module>map-package</module>
+      </modules>
+    </profile>
   </profiles>
 </project>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+    <bean id="mapPackageProcess" class="org.geoserver.wps.gs.MapPackageProcess" >
+        <constructor-arg index="0" ref="catalog"/>
+        <constructor-arg index="1" ref="wpsStorageCleaner"></constructor-arg>
+    </bean>
+</beans>

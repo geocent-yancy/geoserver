@@ -1,0 +1,83 @@
+<ViewContext xmlns="http://www.opengis.net/context"
+             version="1.1.0"
+             id="OpenLayers_Context_66"
+             xsi:schemaLocation="http://www.opengis.net/context http://schemas.opengis.net/context/1.1.0/context.xsd"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <General>
+        <Window width="512" height="256"/>
+        <BoundingBox minx="-117.500000000000000" miny="23.2500000000000000" maxx="-72.5000000000000000" maxy="45.7500000000000000" SRS="EPSG:4326"/>
+        <Title/>
+    </General>
+    <LayerList>
+        <Layer queryable="0" hidden="0">
+            <Server service="OGC:WMS" version="1.1.1">
+                <OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://maps.opengeo.org/geowebcache/service/wms"/>
+            </Server>
+            <Name>bluemarble</Name>
+            <Title>Global Imagery</Title>
+            <FormatList>
+                <Format current="1">image/jpeg</Format>
+            </FormatList>
+            <StyleList>
+                <Style current="1">
+                    <Name/>
+                    <Title>Default</Title>
+                </Style>
+            </StyleList>
+        </Layer>
+        <Layer queryable="0" hidden="1">
+            <Server service="OGC:WMS" version="1.1.1">
+                <OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://vmap0.tiles.osgeo.org/wms/vmap0"/>
+            </Server>
+            <Name>basic</Name>
+            <Title>OpenLayers WMS</Title>
+            <sld:MinScaleDenominator xmlns:sld="http://www.opengis.net/sld">6299645.760000000</sld:MinScaleDenominator>
+            <sld:MaxScaleDenominator xmlns:sld="http://www.opengis.net/sld">31498228.80000000</sld:MaxScaleDenominator>
+            <FormatList>
+                <Format current="1">image/jpeg</Format>
+            </FormatList>
+            <StyleList>
+                <Style current="1">
+                    <Name/>
+                    <Title>Default</Title>
+                </Style>
+            </StyleList>
+        </Layer>
+        <Layer queryable="0" hidden="0">
+            <Server service="OGC:WMS" version="1.1.1">
+                <OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://lioapp.lrc.gov.on.ca/cubeserv/cubeserv.pl"/>
+            </Server>
+            <Name>na_road:CCRS</Name>
+            <Title>Transportation Network</Title>
+            <sld:MinScaleDenominator xmlns:sld="http://www.opengis.net/sld">6200000.000000001</sld:MinScaleDenominator>
+            <sld:MaxScaleDenominator xmlns:sld="http://www.opengis.net/sld">32000000.00000001</sld:MaxScaleDenominator>
+            <FormatList>
+                <Format current="1">image/png</Format>
+            </FormatList>
+            <StyleList>
+                <Style current="1">
+                    <Name/>
+                    <Title>Default</Title>
+                </Style>
+            </StyleList>
+        </Layer>
+        <Layer queryable="0" hidden="0">
+            <Server service="OGC:WMS" version="1.1.1">
+                <OnlineResource xlink:type="simple" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="http://columbo.nrlssc.navy.mil/ogcwms/servlet/WMSServlet/AccuWeather_Maps.wms"/>
+            </Server>
+            <Name>3:1</Name>
+            <Title>Radar 3:1</Title>
+            <sld:MinScaleDenominator xmlns:sld="http://www.opengis.net/sld">6299645.760000000</sld:MinScaleDenominator>
+            <sld:MaxScaleDenominator xmlns:sld="http://www.opengis.net/sld">31498228.80000000</sld:MaxScaleDenominator>
+            <FormatList>
+                <Format current="1">image/png</Format>
+            </FormatList>
+            <StyleList>
+                <Style current="1">
+                    <Name/>
+                    <Title>Default</Title>
+                </Style>
+            </StyleList>
+        </Layer>
+    </LayerList>
+</ViewContext>
