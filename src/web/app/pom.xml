@@ -942,6 +942,16 @@
         </dependency>
       </dependencies>
 		</profile>    
+			<profile>
+	  <id>image-uploader</id>
+      <dependencies>
+        <dependency>
+          <groupId>org.geoserver.community</groupId>
+          <artifactId>image-uploader</artifactId>
+          <version>${project.version}</version>
+        </dependency>
+      </dependencies>
+	</profile>   
  </profiles>
 
 </project>

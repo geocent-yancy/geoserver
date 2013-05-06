@@ -283,5 +283,11 @@
 				<module>libjpeg-turbo</module>
 			</modules>
 		</profile>    
+    <profile>      
+      <id>image-uploader</id>
+      <modules>
+        <module>image-uploader</module>
+      </modules>
+    </profile>  
   </profiles>
 </project>
