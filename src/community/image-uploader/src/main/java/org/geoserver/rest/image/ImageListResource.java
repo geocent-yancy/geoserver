@@ -37,16 +37,19 @@ public class ImageListResource extends AbstractCatalogListResource {
         String fid = getAttribute("fid");
         String attr = getAttribute("attribute");
         
+        // This method no longer works.
+        throw new UnsupportedOperationException("ImageListResource is not currently implemented.");
+        
         // Get a list of images for the Feature's Attribute
-        File directory = catalog.getResourceLoader().findOrCreateDirectory(ImageResource.getDirectoryPath(getRequest()));
-        
-        List<ImageFile> images = new ArrayList<ImageFile>();
-        
-        for (String filename : directory.list()) {
-            images.add(new ImageFile(filename));
-        }
-        
-        return images;
+//        File directory = catalog.getResourceLoader().findOrCreateDirectory(ImageResource.getDirectoryPath(getRequest()));
+//        
+//        List<ImageFile> images = new ArrayList<ImageFile>();
+//        
+//        for (String filename : directory.list()) {
+//            images.add(new ImageFile(filename));
+//        }
+//        
+//        return images;
         // Get a list of Feature IDs
 //        FeatureTypeInfo featureType;
 //

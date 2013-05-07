@@ -3,65 +3,30 @@
 <beans>
     <bean id="imageFinder" class="org.geoserver.rest.image.ImageFinder">
         <constructor-arg ref="geoServer" />
+        <constructor-arg ref="rawCatalog" />
         <constructor-arg ref="filterFactory" />
     </bean>
-    <bean id="imageListFinder" class="org.geoserver.rest.image.ImageListFinder" parent="abstractCatalogFinder"/>
 
     <bean id="imageMapping" class="org.geoserver.rest.RESTMapping">
-       <property name="routes">
-          <map>
-			<!-- List of Features that have images -->
-            <entry>
-              <key><value>/workspaces/{workspace}/datastores/{datastore}/featuretypes/{featuretype}/images</value></key>
-              <value>imageListFinder</value>
-            </entry>
-            <entry>
-              <key><value>/workspaces/{workspace}/datastores/{datastore}/featuretypes/{featuretype}/images.{format}</value></key>
-              <value>imageListFinder</value>
-            </entry>
-			<!-- List of Images for a Feature -->
-            <entry>
-              <key><value>/workspaces/{workspace}/datastores/{datastore}/featuretypes/{featuretype}/images/{fid}</value></key>
-              <value>imageListFinder</value>
-            </entry>
-            <entry>
-              <key><value>/workspaces/{workspace}/datastores/{datastore}/featuretypes/{featuretype}/images/{fid}.{format}</value></key>
-              <value>imageListFinder</value>
-            </entry>
-			<!-- List of Images for a Feature's Attribute -->
-            <entry>
-              <key><value>/workspaces/{workspace}/datastores/{datastore}/featuretypes/{featuretype}/images/{fid}/{attribute}.{format}</value></key>
-              <value>imageListFinder</value>
-            </entry>
-            <entry>
-              <key><value>/workspaces/{workspace}/datastores/{datastore}/featuretypes/{featuretype}/images/{fid}/{attribute}</value></key>
-              <value>imageListFinder</value>
-            </entry>
-			<!-- A specific Image for a Feature's Attribute -->
-			<!-- upload -->
-            <entry>
-              <key><value>/workspaces/{workspace}/datastores/{datastore}/featuretypes/{featuretype}/images/{fid}/{attribute}/file.{format}</value></key>
-              <value>imageFinder</value>
-            </entry>
-            <entry>
-              <key><value>/workspaces/{workspace}/datastores/{datastore}/featuretypes/{featuretype}/images/{fid}/{attribute}/url.{format}</value></key>
-              <value>imageFinder</value>
-            </entry>
-			<!-- retrieve -->
-            <entry>
-              <key><value>/workspaces/{workspace}/datastores/{datastore}/featuretypes/{featuretype}/images/{fid}/{attribute}/{file}.{format}</value></key>
-              <value>imageFinder</value>
-            </entry>
-			
-			<!-- I dunno about this one -->
-			<!--
-            <entry>
-              <key><value>/workspaces/{workspace}/datastores/{datastore}/featuretypes/{featuretype}/images/{fid}/{attribute}/external.{format}</value></key>
-              <value>imageFinder</value>
-            </entry>
-			-->
-         </map>
-      </property>
+        <property name="routes">
+            <map>
+                <!-- A specific Image for a Feature's Attribute -->
+                <!-- retrieve, GET -->
+                <entry>
+                    <key>
+                        <value>/attachments/{workspace}/{featuretype}/{fid}/{attribute}/{file}.{format}</value>
+                    </key>
+                    <value>imageFinder</value>
+                </entry>
+                <!-- upload, POST or PUT -->
+                <entry>
+                    <key>
+                        <value>/attachments/{workspace}/{featuretype}/{fid}/{attribute}</value>
+                    </key>
+                    <value>imageFinder</value>
+                </entry>
+            </map>
+        </property>
     </bean>
 
 </beans>
