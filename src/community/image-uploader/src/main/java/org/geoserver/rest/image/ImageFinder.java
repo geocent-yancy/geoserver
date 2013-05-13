@@ -48,6 +48,8 @@ public class ImageFinder extends AbstractCatalogFinder {
             throw new RestletException("No such feature type: " + ws + "," + ft, Status.CLIENT_ERROR_NOT_FOUND);
         }
 
+        String datastoreName = featureTypeInfo.getStore().getName();
+
         // No fid, a list is requested
 //        if (null == fid) {
         //check the list flag, if == 'available', just return the list 
@@ -64,6 +66,6 @@ public class ImageFinder extends AbstractCatalogFinder {
 //            }
 //        }
 
-        return new ImageResource(getContext(), request, response, geoserver, catalog, featureTypeInfo, filterFactory);
+        return new ImageResource(getContext(), request, response, geoserver, datastoreName, filterFactory);
     }
 }

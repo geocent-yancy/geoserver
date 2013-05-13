@@ -1,3 +1,7 @@
+/* Copyright (c) 2001 - 2013 OpenPlans - www.openplans.org. All rights reserved.
+ * This code is licensed under the GPL 2.0 license, available at the root
+ * application directory.
+ */
 package org.geoserver.rest.image;
 
 import java.io.File;
@@ -11,6 +15,7 @@ import java.util.logging.Logger;
 import org.apache.commons.lang.ArrayUtils;
 import org.geoserver.catalog.Catalog;
 import org.geoserver.catalog.FeatureTypeInfo;
+import org.geoserver.catalog.NamespaceInfo;
 import org.geoserver.config.GeoServer;
 import org.geoserver.rest.AbstractResource;
 import org.geoserver.rest.RestletException;
@@ -47,16 +52,15 @@ public class ImageResource extends AbstractResource {
     static final Logger LOGGER = Logging.getLogger("org.geoserver.catalog.rest");
     GeoServer geoserver;
     Catalog catalog;
-    FeatureTypeInfo featureTypeInfo;
     FilterFactory filterFactory;
+    String datastoreName;
 
-    public ImageResource(Context context, Request request, Response response, GeoServer geoserver, Catalog catalog,
-            FeatureTypeInfo featureType, FilterFactory filterFactory) {
+    public ImageResource(Context context, Request request, Response response, GeoServer geoserver,
+            String datastoreName, FilterFactory filterFactory) {
         super(context, request, response);
         this.geoserver = geoserver;
-//        this.catalog = geoserver.getCatalog();
-        this.catalog = catalog;
-        this.featureTypeInfo = featureType;
+        this.catalog = geoserver.getCatalog();
+        this.datastoreName = datastoreName;
         this.filterFactory = filterFactory;
     }
 
@@ -138,17 +142,17 @@ public class ImageResource extends AbstractResource {
 
     @Override
     public boolean allowPost() {
-        return null == getAttribute("file");
+        return null == getAttribute("file") && null != getFeatureTypeInfo();
     }
 
     @Override
     public boolean allowPut() {
-        return null == getAttribute("file");
+        return null == getAttribute("file") && null != getFeatureTypeInfo();
     }
 
     @Override
     public boolean allowDelete() {
-        return true;
+        return null != getFeatureTypeInfo();
     }
 
     /*
@@ -234,7 +238,7 @@ public class ImageResource extends AbstractResource {
         // Delete the links from the feature
         try {
             FeatureSource<? extends FeatureType, ? extends Feature> featureSource =
-                    featureTypeInfo.getFeatureSource(null, null);
+                    getFeatureTypeInfo().getFeatureSource(null, null);
             if (featureSource instanceof FeatureStore) {
                 String fid = getAttribute("fid");
                 String attr = getAttribute("attribute");
@@ -294,7 +298,7 @@ public class ImageResource extends AbstractResource {
 
         try {
             FeatureSource<? extends FeatureType, ? extends Feature> featureSource =
-                    featureTypeInfo.getFeatureSource(null, null);
+                    getFeatureTypeInfo().getFeatureSource(null, null);
 
             if (featureSource instanceof FeatureStore) {
                 FidFilter fidFilter = filterFactory.createFidFilter(fid);
@@ -437,7 +441,6 @@ public class ImageResource extends AbstractResource {
 
     public List<String> getDirectoryPathAsList() {
         String workspace = getAttribute("workspace");
-        String datastore = featureTypeInfo.getStore().getName();
         String featureType = getAttribute("featuretype");
         String fid = getAttribute("fid");
         String attribute = getAttribute("attribute");
@@ -447,8 +450,8 @@ public class ImageResource extends AbstractResource {
 
         if (workspace != null) {
             path.add(workspace);
-            if (datastore != null) {
-                path.add(datastore);
+            if (datastoreName != null) {
+                path.add(datastoreName);
                 if (featureType != null) {
                     path.add(featureType);
                     path.add("attachments");
@@ -463,5 +466,21 @@ public class ImageResource extends AbstractResource {
         }
 
         return path;
+    }
+
+    private FeatureTypeInfo getFeatureTypeInfo() {
+        String ws = getAttribute("workspace");
+        String ft = getAttribute("featuretype");
+
+        NamespaceInfo ns = catalog.getNamespaceByPrefix(ws);
+        FeatureTypeInfo featureTypeInfo = catalog.getFeatureTypeByName(ns, ft);
+
+        if (null == featureTypeInfo) {
+            throw new RestletException("REST attachment uploader is unable to get the Feature Type "
+                    + ws + ":" + ft + ". Most likely cause is Access Denied.",
+                    Status.CLIENT_ERROR_UNAUTHORIZED);
+        }
+
+        return featureTypeInfo;
     }
 }
